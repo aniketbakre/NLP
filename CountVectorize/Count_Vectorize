@@ -1,0 +1,18 @@
+# How many times the word are in the sentences
+
+# Import necessary librarys
+from sklearn.feature_extraction.text import CountVectorizer
+import seaborn as sns
+# Sample sentences
+sent_1="time flies like an arrow."
+sent_2="Fruit flies like a banana"
+# Define corpous
+corpus=[sent_1,sent_2]
+# Create a binary CountVectorizer. And transform the corpus into a one-hot encoded matrix
+one_hot_vectorizer=CountVectorizer(binary=True)
+one_hot=one_hot_vectorizer.fit_transform(corpus).toarray()
+# Get the feature names (words) from the vectorizer's vocabulary
+words = one_hot_vectorizer.get_feature_names_out()
+print("Words:",words)
+# Plot the heatmap
+sns.heatmap(one_hot,annot=True,cbar=True,linewidths=0.5,linecolor="black",yticklabels=[sent_1,sent_2],xticklabels=words)
